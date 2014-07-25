@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
+	<artifactId>sample-plugin</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>SamplePlugin</name>
+	<url>http://maven.apache.org</url>
+
+	<repositories>
+		<!-- Use repository in ${project.basedir}/lib for JARs that can not be 
+			found in public Maven repositories. -->
+		<!-- Each project ./lib directory should contain dependencies that may 
+			be used by that project. -->
+		<!-- See: http://blog.dub.podval.org/2010/01/maven-in-project-repository.html -->
+		<!-- May ultimately use a local Nexus server or the like for some of these 
+			dependencies. -->
+		<repository>
+			<id>lib</id>
+			<name>lib</name>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
+
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sampleplugin.version>R2013b</sampleplugin.version>
+		<aimapi.version>1.0</aimapi.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- This is in a local project repository (in ./lib) because we could 
+			not find a public Maven repository containing it. -->
+		<dependency>
+			<groupId>com.mathworks</groupId>
+			<artifactId>javabuilder</artifactId>
+			<version>${sampleplugin.version}</version>
+		</dependency>
+		<!-- Contains version-dependent MATLAB-generated Java code used by the 
+			plugin; stored in this project repository in ./lib. 
+		<dependency>
+			<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
+			<artifactId>sampleplugin</artifactId>
+			<version>${sampleplugin.version}</version>
+		</dependency> -->
+		<!-- Contains version-dependent MATLAB-generated Java code used by the 
+			plugin; stored in this project repository in ./lib. -->
+		<dependency>
+			<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
+			<artifactId>readDICOM</artifactId>
+			<version>${sampleplugin.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford.hakan.aim4api</groupId>
+			<artifactId>aimapi</artifactId>
+			<version>${aimapi.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+</project>
