@@ -2,22 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
-	<artifactId>sample-plugin</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<groupId>edu.stanford.epad.plugins.sample-plugin</groupId>
+	<artifactId>sampleplugin</artifactId>
+	<version>1.1</version>
+	<name>ePAD SamplePlugin Plugin</name>
 	<packaging>jar</packaging>
 
-	<name>Sample Plugin</name>
-	<url>http://maven.apache.org</url>
-
 	<repositories>
-		<!-- Use repository in ${project.basedir}/lib for JARs that can not be 
-			found in public Maven repositories. -->
-		<!-- Each project ./lib directory should contain dependencies that may 
-			be used by that project. -->
-		<!-- See: http://blog.dub.podval.org/2010/01/maven-in-project-repository.html -->
-		<!-- May ultimately use a local Nexus server or the like for some of these 
-			dependencies. -->
 		<repository>
 			<id>lib</id>
 			<name>lib</name>
@@ -35,16 +26,30 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sampleplugin.version>R2013b</sampleplugin.version>
+		<matlab.version>R2013b</matlab.version>
 		<aimapi.version>1.0</aimapi.version>
 	</properties>
 
 	<dependencies>
+		<!-- epad-common contains plugin infrastructure code -->
+		<dependency>
+			<groupId>edu.stanford.epad</groupId>
+			<artifactId>epad-common</artifactId>
+			<version>1.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/epad-common-1.1.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+
+		<dependency>
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>servlet-api</artifactId>
+	      <version>2.5</version>
+	    </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -56,29 +61,25 @@
 		<!-- This is in a local project repository (in ./lib) because we could 
 			not find a public Maven repository containing it. -->
 		<dependency>
-			<groupId>com.mathworks</groupId>
+			<groupId>com.matlab</groupId>
 			<artifactId>javabuilder</artifactId>
-			<version>${sampleplugin.version}</version>
+			<version>${matlab.version}</version>
 		</dependency>
-		<!-- Contains version-dependent MATLAB-generated Java code used by the 
-			plugin; stored in this project repository in ./lib. 
-		<dependency>
-			<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
-			<artifactId>sampleplugin</artifactId>
-			<version>${sampleplugin.version}</version>
-		</dependency> -->
+
 		<!-- Contains version-dependent MATLAB-generated Java code used by the 
 			plugin; stored in this project repository in ./lib. -->
 		<dependency>
 			<groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
-			<artifactId>readDICOM</artifactId>
-			<version>${sampleplugin.version}</version>
+			<artifactId>modifyroi_java</artifactId>
+			<version>${matlab.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>edu.stanford.hakan.aim4api</groupId>
 			<artifactId>aimapi</artifactId>
 			<version>${aimapi.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/aimapi-1.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 

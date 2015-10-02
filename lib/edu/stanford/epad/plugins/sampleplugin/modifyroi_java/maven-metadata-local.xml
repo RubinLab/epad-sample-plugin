@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>edu.stanford.epad.plugins.sampleplugin</groupId>
+  <artifactId>modifyroi_java</artifactId>
+  <versioning>
+    <release>R2013b</release>
+    <versions>
+      <version>R2013b</version>
+    </versions>
+    <lastUpdated>20141115131314</lastUpdated>
+  </versioning>
+</metadata>
